@@ -81,24 +81,23 @@ const addBookHandler = (request, h) => {
 };
 
 const getAllBooksHandler = (request, h) => {
-  const { name, reading, finished } = request.query;
   let filterBooks = books;
 
-  if (name) {
+  if (request.query.name) {
     filterBooks = filterBooks.filter((book) =>
-      new RegExp(`${name}`, 'gi').test(book.name)
+      new RegExp(`${request.query.name}`, 'gi').test(book.name)
     );
   }
 
-  if (reading) {
+  if (request.query.reading) {
     filterBooks = filterBooks.filter(
-      (book) => book.reading === (parseInt(reading, 10) === 1)
+      (book) => book.reading === (parseInt(request.query.reading, 10) === 1)
     );
   }
 
-  if (finished) {
+  if (request.query.finished) {
     filterBooks = filterBooks.filter(
-      (book) => book.finished === (parseInt(finished, 10) === 1)
+      (book) => book.finished === (parseInt(request.query.finished, 10) === 1)
     );
   }
 
