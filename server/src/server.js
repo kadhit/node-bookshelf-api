@@ -15,7 +15,12 @@ const init = async () => {
   server.route(routes);
 
   await server.start();
-  console.log(`Server berjalan pada ${server.info.uri}`);
+  console.log(`Server is running on ${server.info.uri}`);
 };
+
+process.on('unhandledRejection', (error) => {
+  console.log(error);
+  process.exit(1);
+});
 
 init();
